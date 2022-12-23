@@ -10,7 +10,9 @@ const index = (props: Props) => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Dashboard />} />
-        <Route path='/datalist' element={<DataList />} />
+        <Route path='/services' element={<DataList />} />
+        <Route path='/articles' element={<DataList />} />
+        <Route path='/about' element={<DataList />} />
       </Routes>
     </BrowserRouter>
   )

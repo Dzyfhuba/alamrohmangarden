@@ -1,7 +1,10 @@
 import React from 'react'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import About from '../Pages/About'
+import Articles from '../Pages/Articles'
 import Dashboard from '../Pages/Dashboard'
 import DataList from '../Pages/DataList'
+import Services from '../Pages/Services'
 
 type Props = {}
 
@@ -10,9 +13,9 @@ const index = (props: Props) => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Dashboard />} />
-        <Route path='/services' element={<DataList />} />
-        <Route path='/articles' element={<DataList />} />
-        <Route path='/about' element={<DataList />} />
+        <Route path='/services' element={<Services />} />
+        <Route path='/articles' element={<Articles />} />
+        <Route path='/about' element={<About />} />
       </Routes>
     </BrowserRouter>
   )

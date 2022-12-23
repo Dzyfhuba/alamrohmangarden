@@ -1,4 +1,5 @@
 import React from 'react'
+import Sidebar from '../Containers/Sidebar'
 
 type Props = {
     children: React.ReactNode
@@ -7,7 +8,10 @@ type Props = {
 const Main = (props: Props) => {
   return (
     <>
+      <Sidebar />
+      <main className='z-0'>
         {props.children}
+      </main>
     </>
   )
 }

@@ -5,14 +5,18 @@ import Routes from './Routes'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {ProSidebarProvider} from 'react-pro-sidebar'
+import { StoreProvider } from 'easy-peasy';
+import { store } from './State/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <ProSidebarProvider>
-    <Routes />
-  </ProSidebarProvider>
+  <StoreProvider store={store}>
+    <ProSidebarProvider>
+      <Routes />
+    </ProSidebarProvider>
+  </StoreProvider>
 );
 
 // If you want your app to work offline and load faster, you can change

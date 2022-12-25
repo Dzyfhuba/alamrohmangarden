@@ -5,20 +5,28 @@ import { Link, NavLink } from 'react-router-dom'
 import Button from '../Components/Button'
 import ButtonTheme from '../Components/ButtonTheme'
 import Logo from '../Images/logo.png'
+import LogoDark from '../Images/logo-dark.png'
+import { useStoreState } from '../State/hook'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Navbar = (props: Props) => {
   const { collapseSidebar } = useProSidebar()
-  
+  const theme = useStoreState(state => state.theme.value)
+
   return (
-    <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-88 flex justify-between items-center dark:bg-slate-900 dark:text-white transition-colors duration-1000' {...props}>
+    <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-88 flex justify-between items-center dark:bg-slate-900 dark:text-white' {...props}>
       <div className='flex w-full justify-between md:w-fit'>
         <Button className='md:hidden' onClick={() => collapseSidebar()}>
           <GiHamburgerMenu size={32} />
         </Button>
         <Link to={'/'}>
-          <img src={Logo} className={'max-h-14'} alt="alam rohman garden" />
+          {theme === 'light' ? 
+            <img src={Logo} className={'max-h-14'} alt="alam rohman garden" /> 
+            : 
+            <img src={LogoDark} className={'max-h-14'} alt="alam rohman garden" /> 
+          }
+          
         </Link>
       </div>
       <div className='hidden md:flex'>

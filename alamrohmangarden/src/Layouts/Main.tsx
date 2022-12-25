@@ -23,7 +23,7 @@ const Main = (props: Props) => {
     <>
       <Sidebar  />
       <Navbar />
-      <main className='z-0 dark:bg-slate-900 dark:text-white transition-colors duration-1000'>
+      <main className='z-0 min-h-screen dark:bg-slate-900 dark:text-white'>
         {props.children}
       </main>
     </>

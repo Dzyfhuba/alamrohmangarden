@@ -2,6 +2,7 @@ import React from 'react'
 import { Menu, MenuItem, Sidebar as ProSidebar, useProSidebar } from 'react-pro-sidebar'
 import { GrClose } from 'react-icons/gr'
 import { NavLink } from 'react-router-dom'
+import ButtonTheme from '../Components/ButtonTheme'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -16,6 +17,7 @@ const Sidebar = (props: Props) => {
           <MenuItem routerLink={<NavLink to={'/services'} />}>Jasa</MenuItem>
           <MenuItem routerLink={<NavLink to={'/articles'} />}>Artikel</MenuItem>
           <MenuItem routerLink={<NavLink to={'/about'} />}>Tentang Kami</MenuItem>
+          <MenuItem><ButtonTheme className='w-full flex justify-center' /></MenuItem>
         </Menu>
       </ProSidebar>
       <div className={`fixed w-screen h-screen top-0 left-0 z-40 ${collapsed ? 'hidden' : 'backdrop-brightness-50'}`} onClick={() => collapseSidebar()}></div>

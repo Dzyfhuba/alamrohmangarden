@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
 import Button from './Button'
 
-type Props = {}
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ButtonTheme = (props: Props) => {
   const [theme, setTheme] = useState<string>('light')
@@ -14,7 +14,8 @@ const ButtonTheme = (props: Props) => {
   }, [])
 
   return (
-    <Button 
+    <Button
+      {...props}
       onClick={
         async() => {
           await SecureStoragePlugin

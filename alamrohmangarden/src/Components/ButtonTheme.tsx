@@ -22,6 +22,11 @@ const ButtonTheme = (props: Props) => {
             .set({key: 'theme', value: (await SecureStoragePlugin.get({key: 'theme'})).value === 'light' ? 'dark' : 'light'})
           const fromStorage = (await SecureStoragePlugin.get({ key: 'theme' })).value
           setTheme(fromStorage)
+          if (fromStorage === 'dark') {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
         }
       }
     >

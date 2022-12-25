@@ -1,10 +1,13 @@
 import React from 'react'
+import RegisterForm from '../../Containers/Forms/RegisterForm'
 
 type Props = {}
 
 const Register = (props: Props) => {
   return (
-    <div>Register</div>
+    <div className="">
+      <RegisterForm />
+    </div>
   )
 }
 

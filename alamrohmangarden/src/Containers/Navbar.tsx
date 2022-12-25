@@ -12,7 +12,7 @@ const Navbar = (props: Props) => {
   const { collapseSidebar } = useProSidebar()
   
   return (
-    <nav className='shadow-md px-2 xl:px-11 md:px-88 flex justify-between items-center ' {...props}>
+    <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-88 flex justify-between items-center dark:bg-slate-900 dark:text-white transition-colors duration-1000' {...props}>
       <div className='flex w-full justify-between md:w-fit'>
         <Button className='md:hidden' onClick={() => collapseSidebar()}>
           <GiHamburgerMenu size={32} />

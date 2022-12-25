@@ -1,10 +1,11 @@
 import React from 'react'
+import Main from '../Layouts/Main'
 
 type Props = {}
 
 const Articles = (props: Props) => {
   return (
-    <div>Articles</div>
+    <Main>Articles</Main>
   )
 }
 

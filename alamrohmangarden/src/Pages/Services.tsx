@@ -1,10 +1,11 @@
 import React from 'react'
+import Main from '../Layouts/Main'
 
 type Props = {}
 
 const Services = (props: Props) => {
   return (
-    <div>Services</div>
+    <Main>Services</Main>
   )
 }
 

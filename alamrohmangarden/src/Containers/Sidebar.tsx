@@ -3,12 +3,12 @@ import { Menu, MenuItem, Sidebar as ProSidebar, useProSidebar } from 'react-pro-
 import { GrClose } from 'react-icons/gr'
 import { NavLink } from 'react-router-dom'
 
-type Props = {}
+interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Sidebar = (props: Props) => {
   const { collapseSidebar, collapsed } = useProSidebar()
   return (
-    <div className={`fixed top-0 left-0`}>
+    <div className={`md:hidden fixed top-0 left-0 ${props.className}`} {...props}>
       <ProSidebar collapsedWidth='0' defaultCollapsed={true} className='bg-white z-50 h-screen'>
         <Menu>
           <MenuItem onClick={() => collapseSidebar()}><span className='flex justify-center'><GrClose /></span></MenuItem>

@@ -10,7 +10,6 @@ const Dashboard = (props: Props) => {
   const { collapseSidebar } = useProSidebar()
   return (
     <Main>
-      <Button onClick={() => collapseSidebar()}><GiHamburgerMenu /></Button>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus rem facilis dolore earum molestiae eum, non accusamus, culpa obcaecati nemo iste eligendi? Dignissimos nisi quisquam perferendis facere similique accusamus ab.
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus rem facilis dolore earum molestiae eum, non accusamus, culpa obcaecati nemo iste eligendi? Dignissimos nisi quisquam perferendis facere similique accusamus ab.
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus rem facilis dolore earum molestiae eum, non accusamus, culpa obcaecati nemo iste eligendi? Dignissimos nisi quisquam perferendis facere similique accusamus ab.

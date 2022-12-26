@@ -15,7 +15,7 @@ const Navbar = (props: Props) => {
   const theme = useStoreState(state => state.theme.value)
 
   return (
-    <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-88 flex justify-between items-center dark:bg-slate-900 dark:text-white' {...props}>
+    <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-88 flex justify-between items-center dark:bg-dark dark:text-white' {...props}>
       <div className='flex w-full justify-between md:w-fit'>
         <Button className='md:hidden' onClick={() => collapseSidebar()}>
           <GiHamburgerMenu size={32} />
@@ -30,10 +30,10 @@ const Navbar = (props: Props) => {
         </Link>
       </div>
       <div className='hidden md:flex'>
-        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:border-b-4 active:border-black'} to={'/'}>Dashboard</NavLink>
-        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:border-b-4 active:border-black'} to={'/services'}>Jasa</NavLink>
-        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:border-b-4 active:border-black'} to={'/articles'}>Artikel</NavLink>
-        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:border-b-4 active:border-black'} to={'/about'}>Tentang Kami</NavLink>
+        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:shadow-soft active:shadow-hard'} to={'/'}>Dashboard</NavLink>
+        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:shadow-soft active:shadow-hard'} to={'/services'}>Jasa</NavLink>
+        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:shadow-soft active:shadow-hard'} to={'/articles'}>Artikel</NavLink>
+        <NavLink className={'px-5 py-2.5 whitespace-nowrap hover:shadow-soft active:shadow-hard'} to={'/about'}>Tentang Kami</NavLink>
         <ButtonTheme />
       </div>
     </nav>

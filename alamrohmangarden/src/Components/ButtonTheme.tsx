@@ -1,14 +1,13 @@
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 import React, { useEffect, useState } from 'react'
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
-import { useStoreActions, useStoreState } from '../State/hook'
+import { useStoreActions } from '../State/hook'
 import Button from './Button'
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const ButtonTheme = (props: Props) => {
   const [theme, setTheme] = useState<string>('light')
-  const themeState = useStoreState((state) => state.theme.value)
   const themeToggle = useStoreActions((actions) => actions.themeToggle)
   useEffect(() => {
     (async () => {

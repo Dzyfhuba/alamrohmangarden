@@ -1,10 +1,8 @@
 import React from 'react'
+import { MdClose } from 'react-icons/md'
 import { Menu, MenuItem, Sidebar as ProSidebar, useProSidebar } from 'react-pro-sidebar'
-import { GrClose } from 'react-icons/gr'
 import { NavLink } from 'react-router-dom'
 import ButtonTheme from '../Components/ButtonTheme'
-import Button from '../Components/Button'
-import { MdClose } from 'react-icons/md'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 

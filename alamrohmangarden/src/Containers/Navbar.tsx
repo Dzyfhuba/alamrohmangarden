@@ -21,12 +21,7 @@ const Navbar = (props: Props) => {
           <GiHamburgerMenu size={32} />
         </Button>
         <Link to={'/'}>
-          {theme === 'light' ? 
-            <img src={Logo} className={'max-h-14'} alt="alam rohman garden" /> 
-            : 
-            <img src={LogoDark} className={'max-h-14'} alt="alam rohman garden" /> 
-          }
-          
+          <img src={theme === 'light' ? Logo : LogoDark} className={'max-h-14'} alt="alam rohman garden" /> 
         </Link>
       </div>
       <div className='hidden md:flex'>

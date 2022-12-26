@@ -14,7 +14,8 @@ module.exports = {
         'second-darkest': '#324802',
         light: '#e8e5b8',
         dark: '#312a1a',
-        darker: 'rgb(7 15 29 / 1)'
+        darker: '#251f13',
+        darkest: '#18150d'
       },
       boxShadow:{
         'soft': 'inset 0px -4px 0px 0px rgb(0 0 0 / 30%)',

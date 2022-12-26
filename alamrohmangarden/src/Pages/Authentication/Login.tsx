@@ -1,10 +1,14 @@
 import React from 'react'
+import LoginForm from '../../Containers/Forms/LoginForm'
+import Authentication from '../../Layouts/Authentication'
 
 type Props = {}
 
 const Login = (props: Props) => {
   return (
-    <div>Login</div>
+    <Authentication>
+      <LoginForm />
+    </Authentication>
   )
 }
 

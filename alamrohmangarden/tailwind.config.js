@@ -6,11 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        first: '#FF8D00',
-        second: '#F2FF00',
-        third: '#FF0D00',
-        light: 'rgb(250 250 250 / 1)',
-        dark: 'rgb(15 23 42 / 1)',
+        first: '#274f13',
+        'first-darker': '#1d3b0e',
+        'first-darkest': '#132709',
+        second: '#659003',
+        'second-darker': '#4c6c02',
+        'second-darkest': '#324802',
+        light: '#e8e5b8',
+        dark: '#312a1a',
         darker: 'rgb(7 15 29 / 1)'
       },
       boxShadow:{

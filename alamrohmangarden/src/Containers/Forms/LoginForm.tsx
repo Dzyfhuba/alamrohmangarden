@@ -5,6 +5,10 @@ import Label from '../../Components/Label'
 import Icon from '../../Images/icon.png'
 import IconDark from '../../Images/icon-dark.png'
 import { useStoreState } from '../../State/hook'
+import axios, { AxiosError } from 'axios'
+import { host } from '../../Variables'
+import Swal from 'sweetalert2'
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 
 type Props = {}
 
@@ -22,7 +26,19 @@ const LoginForm = (props: Props) => {
   const handleSubmit = (e: React.BaseSyntheticEvent) => {
     e.preventDefault()
 
-    console.log(formData);
+    axios
+      .post(`${host}/login`, formData)
+      .then(async res => {
+        console.log({data: res.data})
+        await SecureStoragePlugin.set({key: 'user', value: JSON.stringify(res.data.user)})
+        const user = await SecureStoragePlugin.get({key: 'user'})
+        console.table(JSON.parse(user.value))
+        await SecureStoragePlugin.set({key: 'token', value: res.data.token.token})
+        const token = await SecureStoragePlugin.get({key: 'token'})
+      })
+      .catch((err: AxiosError) => {
+        Swal.fire('Error', JSON.stringify(err.response), 'error')
+      })
   }
 
   return (

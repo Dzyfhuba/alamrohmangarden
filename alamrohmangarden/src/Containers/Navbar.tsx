@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useProSidebar } from 'react-pro-sidebar'
 import { Link, NavLink } from 'react-router-dom'
@@ -6,13 +6,22 @@ import Button from '../Components/Button'
 import ButtonTheme from '../Components/ButtonTheme'
 import Logo from '../Images/logo.png'
 import LogoDark from '../Images/logo-dark.png'
-import { useStoreState } from '../State/hook'
+import { useStoreActions, useStoreState } from '../State/hook'
+import GetTheme from '../Utils/GetTheme'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Navbar = (props: Props) => {
   const { collapseSidebar } = useProSidebar()
   const theme = useStoreState(state => state.theme.value)
+  const themeToggle = useStoreActions(actions => actions.themeToggle)
+
+  useEffect(() => {
+    (async () => {
+      const theme = await GetTheme()
+      themeToggle({value: theme})
+    })()
+  }, [themeToggle])
 
   return (
     <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-88 flex justify-between items-center dark:bg-dark dark:text-white' {...props}>

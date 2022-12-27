@@ -7,7 +7,10 @@
     "build": "node ace build --production",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "migration:fresh": "node ace migration:fresh",
+    "db:seed": "node ace db:seed --files ./database/seeders/DatabaseSeeder.ts",
+    "migration:seed": "npm run migration:fresh && npm run db:seed"
   },
   "eslintConfig": {
     "extends": [
@@ -52,12 +55,14 @@
     "youch-terminal": "^2.1.5"
   },
   "dependencies": {
+    "@adonisjs/auth": "^8.2.3",
     "@adonisjs/core": "^5.8.8",
-    "@adonisjs/lucid": "^18.2.0",
+    "@adonisjs/lucid": "^18.3.0",
     "@adonisjs/repl": "^3.1.11",
     "capacitor-secure-storage-plugin": "^0.8.1",
     "luxon": "^3.1.0",
     "mysql2": "^2.3.3",
+    "phc-argon2": "^1.1.4",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"

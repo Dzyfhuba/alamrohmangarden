@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import About from '../Pages/About'
+import AdminServices from '../Pages/Admin/AdminServices'
 import Articles from '../Pages/Articles'
 import Login from '../Pages/Authentication/Login'
 import Register from '../Pages/Authentication/Register'
@@ -19,6 +20,8 @@ const index = (props: Props) => {
 
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        
+        <Route path='/admin/services' element={<AdminServices />} />
       </Routes>
     </BrowserRouter>
   )

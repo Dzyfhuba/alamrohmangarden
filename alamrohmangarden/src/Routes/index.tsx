@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Route, Routes, useNavigate, RedirectFunction } from 'react-router-dom'
 import About from '../Pages/About'
 import AdminServices from '../Pages/Admin/AdminServices'
 import Articles from '../Pages/Articles'
@@ -10,6 +11,7 @@ import Services from '../Pages/Services'
 type Props = {}
 
 const index = (props: Props) => {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -21,6 +23,7 @@ const index = (props: Props) => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         
+        <Route path='/admin' element={<Redirect to='/admin/services' />} />
         <Route path='/admin/services' element={<AdminServices />} />
       </Routes>
     </BrowserRouter>
@@ -28,3 +31,14 @@ const index = (props: Props) => {
 }
 
 export default index
+
+
+const Redirect = (props: {to: string}) => {
+  const navigate = useNavigate()
+  useEffect(() => {
+    navigate(props.to)
+  })
+  return (
+    <></>
+  )
+}

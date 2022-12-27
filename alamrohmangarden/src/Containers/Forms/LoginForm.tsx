@@ -9,6 +9,8 @@ import axios, { AxiosError } from 'axios'
 import { host } from '../../Variables'
 import Swal from 'sweetalert2'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
+import { JsonApiErrorNode } from '../../Utils/ErrorBadRequest'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
@@ -22,6 +24,7 @@ interface FormData {
 const LoginForm = (props: Props) => {
   const [formData, setFormData] = useState<FormData>()
   const theme = useStoreState(state => state.theme.value)
+  const navigate = useNavigate()
 
   const handleSubmit = (e: React.BaseSyntheticEvent) => {
     e.preventDefault()
@@ -35,9 +38,14 @@ const LoginForm = (props: Props) => {
         console.table(JSON.parse(user.value))
         await SecureStoragePlugin.set({key: 'token', value: res.data.token.token})
         const token = await SecureStoragePlugin.get({key: 'token'})
+        console.log(token.value);
+        navigate('/admin')
       })
       .catch((err: AxiosError) => {
-        Swal.fire('Error', JSON.stringify(err.response), 'error')
+        const data = err.response?.data as JsonApiErrorNode
+        console.error(data)
+        
+        Swal.fire('Error', data.error.messages.errors.map(item => `${item.source.pointer} is invalid`).join(', '), 'error')
       })
   }
 

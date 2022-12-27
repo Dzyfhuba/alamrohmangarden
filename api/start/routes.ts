@@ -26,3 +26,13 @@ Route.get('/', async () => {
 
 Route.post('/register', 'Authentication/RegisterController.index')
 Route.post('/login', 'Authentication/LoginController.index')
+Route.get('/logout', 'Authentication/LogoutController.index').middleware('auth:api')
+Route.get('/check', async ({ auth, response }) => {
+  try {
+    const isLoggedIn = await auth.use('api').isLoggedIn
+
+    return response.ok({ isLoggedIn })
+  } catch (error) {
+    return response.badRequest(error)
+  }
+}).middleware('auth:api')

@@ -1,7 +1,7 @@
-import { schema, rules, validator, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, rules, CustomMessages } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class LoginValidator {
+export default class ServiceStoreValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,14 +24,13 @@ export default class LoginValidator {
    *    ```
    */
   public schema = schema.create({
-    username: schema.string({}, [
-      rules.required(),
-      rules.exists({ column: 'username', table: 'users' }),
-    ]),
-    password: schema.string({}, [rules.required()]),
+    title: schema.string({}, [rules.required()]),
+    content: schema.string({}, [rules.required()]),
+    images: schema.array
+      .optional()
+      .members(schema.file({ extnames: ['jpg', 'jpeg', 'png', 'gif'], size: '2mb' })),
+    tags: schema.array().members(schema.string({}, [rules.required()])),
   })
-
-  public reporter = validator.reporters.jsonapi
 
   /**
    * Custom messages for validation failures. You can make use of dot notation `(.)`

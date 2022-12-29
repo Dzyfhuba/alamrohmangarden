@@ -36,3 +36,7 @@ Route.get('/check', async ({ auth, response }) => {
     return response.badRequest(error)
   }
 }).middleware('auth:api')
+
+Route.group(() => {
+  Route.resource('/services', 'ServicesController')
+}).middleware('auth:api')

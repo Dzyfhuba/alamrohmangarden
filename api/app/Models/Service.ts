@@ -1,6 +1,5 @@
-import { DateTime } from 'luxon'
+import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 import {
-  afterFetch,
   afterFind,
   BaseModel,
   beforeCreate,
@@ -8,8 +7,7 @@ import {
   beforeUpdate,
   column,
 } from '@ioc:Adonis/Lucid/Orm'
-import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
-import Logger from '@ioc:Adonis/Core/Logger'
+import { DateTime } from 'luxon'
 
 export default class Service extends BaseModel {
   @column({ isPrimary: true })
@@ -84,8 +82,10 @@ export default class Service extends BaseModel {
 
   @afterFind()
   public static parsingAfterFind(service: Service) {
-    service.images = service.images as string
-    service.images = service.images.split(',')
+    if (service.images) {
+      service.images = service.images as string
+      service.images = service.images.split(',')
+    }
   }
 
   @column.dateTime({ autoCreate: true })

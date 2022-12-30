@@ -39,4 +39,5 @@ Route.get('/check', async ({ auth, response }) => {
 
 Route.group(() => {
   Route.resource('/services', 'ServicesController')
+  Route.resource('/articles', 'ArticlesController')
 }).middleware('auth:api')

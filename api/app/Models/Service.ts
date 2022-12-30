@@ -1,5 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeCreate, beforeSave, beforeUpdate, column } from '@ioc:Adonis/Lucid/Orm'
+import {
+  afterFetch,
+  afterFind,
+  BaseModel,
+  beforeCreate,
+  beforeSave,
+  beforeUpdate,
+  column,
+} from '@ioc:Adonis/Lucid/Orm'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 import Logger from '@ioc:Adonis/Core/Logger'
 
@@ -28,21 +36,33 @@ export default class Service extends BaseModel {
 
   @beforeCreate()
   public static imagesBC(service: Service) {
-    if (typeof service.images !== 'string') {
+    if (
+      typeof service.images !== 'string' &&
+      service.images !== undefined &&
+      service.images !== null
+    ) {
       service.images = service.images.toString()
     }
   }
 
   @beforeSave()
   public static imagesBS(service: Service) {
-    if (typeof service.images !== 'string') {
+    if (
+      typeof service.images !== 'string' &&
+      service.images !== undefined &&
+      service.images !== null
+    ) {
       service.images = service.images.toString()
     }
   }
 
   @beforeUpdate()
   public static imagesBU(service: Service) {
-    if (typeof service.images !== 'string') {
+    if (
+      typeof service.images !== 'string' &&
+      service.images !== undefined &&
+      service.images !== null
+    ) {
       service.images = service.images.toString()
     }
   }
@@ -60,6 +80,12 @@ export default class Service extends BaseModel {
   @beforeUpdate()
   public static tagsBU(service: Service) {
     service.tags = service.tags.toString()
+  }
+
+  @afterFind()
+  public static parsingAfterFind(service: Service) {
+    service.images = service.images as string
+    service.images = service.images.split(',')
   }
 
   @column.dateTime({ autoCreate: true })

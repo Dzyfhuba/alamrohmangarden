@@ -42,3 +42,9 @@ Route.group(() => {
   Route.resource('/admin/articles', 'ArticlesController')
   Route.resource('/admin/about', 'AboutsController')
 }).middleware('auth:api')
+
+Route.get('/services', 'ServicesController.index')
+Route.get('/services/:id', 'ServicesController.show')
+Route.get('/articles', 'ArticlesController.index')
+Route.get('/articles/:id', 'ArticlesController.show')
+Route.get('/about', 'AboutsController.index')

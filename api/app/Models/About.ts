@@ -9,6 +9,15 @@ export default class About extends BaseModel {
   public name: string
 
   @column()
+  public phone: string
+
+  @column()
+  public instagram: string
+
+  @column()
+  public maps: string
+
+  @column()
   public address: string
 
   @column()

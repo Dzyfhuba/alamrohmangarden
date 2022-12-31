@@ -65,6 +65,8 @@
     "mysql2": "^2.3.3",
     "nanoid": "^3.3.4",
     "phc-argon2": "^1.1.4",
+    "phc-bcrypt": "^1.0.8",
+    "pm2": "^5.2.2",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21"

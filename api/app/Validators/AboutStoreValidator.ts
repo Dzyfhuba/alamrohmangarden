@@ -25,6 +25,9 @@ export default class AboutStoreValidator {
    */
   public schema = schema.create({
     name: schema.string({}, [rules.required()]),
+    phone: schema.string({}, [rules.required()]),
+    instagram: schema.string({}, [rules.required()]),
+    maps: schema.string({}, [rules.required()]),
     address: schema.string({}, [rules.required()]),
     description: schema.string({}, [rules.required()]),
   })

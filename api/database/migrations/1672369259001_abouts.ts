@@ -8,6 +8,9 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('name')
+      table.string('phone')
+      table.string('instagram')
+      table.text('maps')
       table.text('address')
       table.text('description')
 

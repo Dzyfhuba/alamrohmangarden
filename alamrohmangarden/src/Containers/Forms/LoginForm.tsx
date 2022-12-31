@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 import { JsonApiErrorNode } from '../../Utils/ErrorBadRequest'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 type Props = {}
 
@@ -42,6 +43,10 @@ const LoginForm = (props: Props) => {
         navigate('/admin')
       })
       .catch((err: AxiosError) => {
+        if (!err.response) {
+          toast(JSON.stringify(err.message))
+          return
+        }
         const data = err.response?.data as JsonApiErrorNode
         console.error(data)
         

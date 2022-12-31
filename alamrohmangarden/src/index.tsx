@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import {ProSidebarProvider} from 'react-pro-sidebar'
 import { StoreProvider } from 'easy-peasy';
 import { store } from './State/store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,6 +18,7 @@ root.render(
     <ProSidebarProvider>
       <Routes />
     </ProSidebarProvider>
+    <ToastContainer />
   </StoreProvider>
 );
 

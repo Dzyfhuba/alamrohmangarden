@@ -23,7 +23,7 @@ const index = (props: Props) => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         
-        <Route path='/admin' element={<Redirect to='/admin/services' />} />
+        <Route path='/admin' element={<AdminServices />} />
         <Route path='/admin/services' element={<AdminServices />} />
       </Routes>
     </BrowserRouter>

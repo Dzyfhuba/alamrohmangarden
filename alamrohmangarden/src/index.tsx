@@ -9,6 +9,17 @@ import { StoreProvider } from 'easy-peasy';
 import { store } from './State/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
+
+// get dark theme in first time after load/reload
+(async () => {
+  const theme = await SecureStoragePlugin.get({key: 'theme'}).catch(async () => await SecureStoragePlugin.set({key: 'theme', value: 'dark'}))
+  if (theme.value === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+})()
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

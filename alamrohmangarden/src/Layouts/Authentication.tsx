@@ -22,7 +22,7 @@ const Authentication = (props: Props) => {
 
       const { isLoggedIn } = await AuthCheck()
       if (isLoggedIn) {
-        // navigate('/admin')
+        navigate('/admin')
       }
     })()
   }, [navigate])

@@ -1,12 +1,12 @@
 import { SecureStoragePlugin } from "capacitor-secure-storage-plugin"
-import { useNavigate } from "react-router-dom"
+import { redirect, useNavigate } from "react-router-dom"
 
-const LogoutRequest = async () => {
-  await SecureStoragePlugin.remove({key: 'token'})
-  await SecureStoragePlugin.remove({key: 'user'})
+// const navigate = useNavigate()
+const LogoutRequest = () => {
+  SecureStoragePlugin.remove({key: 'token'})
+  SecureStoragePlugin.remove({key: 'user'})
 
-  const navigate = useNavigate()
-  navigate('/')
+  redirect('/')
 }
 
 export default LogoutRequest

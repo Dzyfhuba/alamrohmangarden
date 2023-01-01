@@ -24,7 +24,7 @@ const Navbar = (props: Props) => {
   }, [themeToggle])
 
   return (
-    <nav className='shadow sticky top-0 px-2 xl:px-11 md:px-8 flex justify-between items-center dark:bg-dark dark:text-white' {...props}>
+    <nav className='shadow-[0_4px_12px_0px_rgba(0,0,0,0.3)] sticky top-0 px-2 xl:px-11 md:px-8 flex justify-between items-center dark:bg-dark dark:text-white' {...props}>
       <div className='flex w-full justify-between md:w-fit'>
         <Button className='md:hidden' onClick={() => collapseSidebar()}>
           <GiHamburgerMenu size={32} />

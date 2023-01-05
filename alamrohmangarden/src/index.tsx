@@ -10,6 +10,7 @@ import { store } from './State/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
+import LoadingLayer from './Containers/LoadingLayer';
 
 // get dark theme in first time after load/reload
 (async () => {
@@ -27,6 +28,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <StoreProvider store={store}>
     <ProSidebarProvider>
+      <LoadingLayer />
       <Routes />
     </ProSidebarProvider>
     <ToastContainer />

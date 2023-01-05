@@ -6,12 +6,18 @@ interface Theme {value: string}
 export interface StoreModel {
   theme: Theme;
   themeToggle: Action<StoreModel, Theme>;
+  isLoading: boolean;
+  setLoading: Action<StoreModel, boolean>;
 }
 
 export const store = createStore<StoreModel>({
   theme: {value: 'light'},
   themeToggle: action((state, payload) => {
     state.theme.value = payload.value
+  }),
+  isLoading: false,
+  setLoading: action((state, payload) => {
+    state.isLoading = payload
   })
 });
 

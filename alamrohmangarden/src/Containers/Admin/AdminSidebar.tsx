@@ -4,9 +4,12 @@ import { GiGardeningShears, GiHamburgerMenu } from 'react-icons/gi'
 import { ImProfile } from 'react-icons/im'
 import { MdArticle, MdDarkMode, MdLightMode, MdLogout } from 'react-icons/md'
 import { Menu, MenuItem, Sidebar, useProSidebar } from 'react-pro-sidebar'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { ConfirmLogoutSweetAlertOption } from '../../Options/Sweetalert2Options'
 import { useStoreActions } from '../../State/hook'
 import GetTheme from '../../Utils/GetTheme'
+import LogoutRequest from '../../Utils/LogoutRequest'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -14,6 +17,8 @@ const AdminSidebar = (props: Props) => {
   const {collapseSidebar} = useProSidebar()
   const [theme, setTheme] = useState<string>('light')
   const themeToggle = useStoreActions(actions => actions.themeToggle)
+  const setLoading = useStoreActions(actions => actions.setLoading)
+  const navigate = useNavigate()
   useEffect(() => {
     (async () => {
       const theme = await GetTheme()
@@ -27,7 +32,17 @@ const AdminSidebar = (props: Props) => {
         <MenuItem icon={<GiGardeningShears />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/services'} />}>Jasa</MenuItem>
         <MenuItem icon={<MdArticle />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/articles'} />}>Artikel</MenuItem>
         <MenuItem icon={<ImProfile />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/about'} />}>Tentang Kami</MenuItem>
-        <MenuItem icon={<MdLogout />} className='z-20 dark:hover:text-black'>Logout</MenuItem>
+        <MenuItem icon={<MdLogout />} className='z-20 dark:hover:text-black' onClick={() => {
+          Swal.fire(ConfirmLogoutSweetAlertOption)
+            .then(async () => {
+              setLoading(true)
+              const {isSuccess} = await LogoutRequest()
+              if (isSuccess) {
+                navigate('/')
+                setLoading(false)
+              }
+            })
+        }}>Logout</MenuItem>
         <MenuItem icon={theme === 'dark' ? <MdDarkMode /> : <MdLightMode /> } className='z-20 dark:hover:text-black capitalize' 
           onClick={async() => {
             await SecureStoragePlugin

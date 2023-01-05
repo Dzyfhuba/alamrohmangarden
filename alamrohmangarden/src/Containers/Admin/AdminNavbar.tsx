@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { GiGardeningShears } from 'react-icons/gi'
 import { ImProfile } from 'react-icons/im'
 import { MdArticle, MdLogout } from 'react-icons/md'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Button from '../../Components/Button'
 import ButtonTheme from '../../Components/ButtonTheme'
 import LogoDark from '../../Images/logo-dark.png'
@@ -18,6 +18,7 @@ type Props = {
 const AdminNavbar = (props: Props) => {
   const theme = useStoreState(state => state.theme.value)
   const themeToggle = useStoreActions((actions) => actions.themeToggle)
+  const navigate = useNavigate()
   useEffect(() => {
     (async () => {
       const theme = await GetTheme()
@@ -44,7 +45,12 @@ const AdminNavbar = (props: Props) => {
         <NavLink to={'/admin/about'}>
           <ImProfile size={48} />
         </NavLink>
-        <Button className='px-0 py-0' onClick={async () => LogoutRequest()}>
+        <Button className='px-0 py-0' onClick={async () => {
+          const {isSuccess} = await LogoutRequest()
+          if (isSuccess) {
+            navigate('/')
+          }
+        }}>
           <MdLogout size={48} />
         </Button>
         <ButtonTheme />

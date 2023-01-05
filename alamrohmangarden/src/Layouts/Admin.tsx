@@ -11,6 +11,8 @@ const Admin = (props: Props) => {
   useEffect(() => {
     (async () => {
       const { isLoggedIn } = await AuthCheck()
+      console.log(isLoggedIn);
+      
       if (!isLoggedIn) {
         navigate('/login')
       }

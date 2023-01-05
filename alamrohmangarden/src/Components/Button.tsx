@@ -7,7 +7,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{
 const Button = (props: Props) => {
   if (props.level === 'primary') {
     return (
-      <button {...props} className={`px-5 py-2.5 min-w-[44px] min-h-[44px] bg-first text-white hover:bg-first-darker active:bg-first-darkest rounded ${'' + props.className}`}>
+      <button {...props} className={`px-5 py-2.5 min-w-[44px] min-h-[44px] bg-first text-white hover:bg-first-darker active:bg-first-darkest disabled:bg-first-darkest rounded ${'' + props.className}`}>
         {props.children}
       </button>
     )

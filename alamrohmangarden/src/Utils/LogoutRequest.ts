@@ -1,12 +1,22 @@
+import axios from "axios"
 import { SecureStoragePlugin } from "capacitor-secure-storage-plugin"
-import { redirect, useNavigate } from "react-router-dom"
+import { redirect } from "react-router-dom"
+import { host } from "../Variables"
 
 // const navigate = useNavigate()
-const LogoutRequest = () => {
-  SecureStoragePlugin.remove({key: 'token'})
-  SecureStoragePlugin.remove({key: 'user'})
+const LogoutRequest = async () => {
+  const token = await SecureStoragePlugin.get({key: 'token'})
+  const response = await axios.get(host + '/logout', {
+    headers: {
+      Authorization: `Bearer ${token.value}`
+    }
+  })
+    .then(() => true)
+    .catch(() => false)
+  await SecureStoragePlugin.remove({key: 'token'})
+  await SecureStoragePlugin.remove({key: 'user'})
 
-  redirect('/')
+  return {isSuccess: response}
 }
 
 export default LogoutRequest

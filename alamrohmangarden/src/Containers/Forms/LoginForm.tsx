@@ -12,6 +12,7 @@ import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 import { JsonApiErrorNode } from '../../Utils/ErrorBadRequest'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import ScaleLoader from 'react-spinners/ScaleLoader'
 
 type Props = {}
 
@@ -26,21 +27,23 @@ const LoginForm = (props: Props) => {
   const [formData, setFormData] = useState<FormData>()
   const theme = useStoreState(state => state.theme.value)
   const navigate = useNavigate()
+  const [isLoading, setLoading] = useState<boolean>(false)
 
-  const handleSubmit = (e: React.BaseSyntheticEvent) => {
+  const handleSubmit = async (e: React.BaseSyntheticEvent) => {
     e.preventDefault()
 
-    axios
+    setLoading(true)
+    const res = await axios
       .post(`${host}/login`, formData)
       .then(async res => {
-        console.log({data: res.data})
+        console.log(res.data)
         await SecureStoragePlugin.set({key: 'user', value: JSON.stringify(res.data.user)})
         const user = await SecureStoragePlugin.get({key: 'user'})
         console.table(JSON.parse(user.value))
         await SecureStoragePlugin.set({key: 'token', value: res.data.token.token})
         const token = await SecureStoragePlugin.get({key: 'token'})
         console.log(token.value);
-        navigate('/admin')
+        return true
       })
       .catch((err: AxiosError) => {
         if (!err.response) {
@@ -51,8 +54,16 @@ const LoginForm = (props: Props) => {
         console.error(data)
         
         Swal.fire('Error', data.error.messages.errors.map(item => `${item.source.pointer} is invalid`).join(', '), 'error')
+        return false
       })
+    setLoading(false)
+    if (res) {
+      navigate('/admin')
+    }
   }
+
+  console.log(isLoading);
+  
 
   return (
     <form
@@ -69,7 +80,9 @@ const LoginForm = (props: Props) => {
         <Label>Password</Label>
         <Input onChange={(e:React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, password: e.target.value})} type={'password'} required/>
       </div>
-      <Button type='submit' level='primary'>Login</Button>
+      <Button type='submit' level='primary' disabled={isLoading ? true : false}>
+        {isLoading ? <ScaleLoader height={10} color={'#fff'} /> : 'Login'}
+      </Button>
     </form>
   )
 }

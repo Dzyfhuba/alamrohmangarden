@@ -10,7 +10,10 @@ const AuthCheck = async () => {
   
   const isLoggedIn = await axios
     .get(host + '/check', {headers: {Authorization: `Bearer ${token}`}})
-    .then(res => res.data.isLoggedIn)
+    .then(res => {
+      console.log(res);
+      return true
+    })
     .catch(() => false)
 
   return {token, isLoggedIn}

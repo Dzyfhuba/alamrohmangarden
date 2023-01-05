@@ -62,9 +62,6 @@ const LoginForm = (props: Props) => {
     }
   }
 
-  console.log(isLoading);
-  
-
   return (
     <form
       className='flex flex-col gap-3 w-full'

@@ -13,13 +13,13 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Navbar = (props: Props) => {
   const { collapseSidebar } = useProSidebar()
-  const theme = useStoreState(state => state.theme.value)
+  const theme = useStoreState(state => state.theme)
   const themeToggle = useStoreActions(actions => actions.themeToggle)
 
   useEffect(() => {
     (async () => {
       const theme = await GetTheme()
-      themeToggle({value: theme})
+      themeToggle(theme)
     })()
   }, [themeToggle])
 

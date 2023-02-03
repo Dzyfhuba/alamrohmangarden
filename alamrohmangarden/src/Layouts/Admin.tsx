@@ -14,7 +14,7 @@ const Admin = (props: Props) => {
       console.log(isLoggedIn);
       
       if (!isLoggedIn) {
-        navigate('/login')
+        navigate('/404')
       }
     })()
   }, [navigate])

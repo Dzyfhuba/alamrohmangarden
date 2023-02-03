@@ -1,23 +1,28 @@
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
 import { createStore, action, Action } from 'easy-peasy'
 
-interface Theme {value: string}
 
 export interface StoreModel {
-  theme: Theme;
-  themeToggle: Action<StoreModel, Theme>;
+  theme: 'light' | 'dark';
+  themeToggle: Action<StoreModel, 'light' | 'dark'>;
   isLoading: boolean;
   setLoading: Action<StoreModel, boolean>;
+  isLoggedIn: boolean,
+  setLoggedIn: Action<StoreModel, boolean>
 }
 
 export const store = createStore<StoreModel>({
-  theme: {value: 'light'},
+  theme: 'light',
   themeToggle: action((state, payload) => {
-    state.theme.value = payload.value
+    state.theme = payload
   }),
   isLoading: false,
   setLoading: action((state, payload) => {
     state.isLoading = payload
+  }),
+  isLoggedIn: false,
+  setLoggedIn: action((state, payload) => {
+    state.isLoggedIn = payload
   })
 });
 

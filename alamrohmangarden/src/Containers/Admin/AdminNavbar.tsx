@@ -16,13 +16,13 @@ type Props = {
 }
 
 const AdminNavbar = (props: Props) => {
-  const theme = useStoreState(state => state.theme.value)
+  const theme = useStoreState(state => state.theme)
   const themeToggle = useStoreActions((actions) => actions.themeToggle)
   const navigate = useNavigate()
   useEffect(() => {
     (async () => {
       const theme = await GetTheme()
-      themeToggle({value: theme})
+      themeToggle(theme)
     })()
   }, [])
   if (props.base === 'top') {

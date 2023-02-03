@@ -47,10 +47,13 @@ const AdminSidebar = (props: Props) => {
           onClick={async() => {
             await SecureStoragePlugin
               .set({key: 'theme', value: (await SecureStoragePlugin.get({key: 'theme'})).value === 'light' ? 'dark' : 'light'})
-            const fromStorage = (await SecureStoragePlugin.get({ key: 'theme' })).value
+            const fromStorage = await SecureStoragePlugin.get({ key: 'theme' })
+              .then(val => val.value as 'light' | 'dark')
+              .catch(() => 'dark' as 'light' | 'dark')
+
     
             setTheme(fromStorage)
-            themeToggle({value: fromStorage})
+            themeToggle(fromStorage)
             if (fromStorage === 'dark') {
               document.documentElement.classList.add('dark')
             } else {

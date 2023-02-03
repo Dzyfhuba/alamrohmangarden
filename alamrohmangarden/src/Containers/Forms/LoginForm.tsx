@@ -25,7 +25,7 @@ interface FormData {
 
 const LoginForm = (props: Props) => {
   const [formData, setFormData] = useState<FormData>()
-  const theme = useStoreState(state => state.theme.value)
+  const theme = useStoreState(state => state.theme)
   const navigate = useNavigate()
   const [isLoading, setLoading] = useState<boolean>(false)
 
@@ -71,7 +71,7 @@ const LoginForm = (props: Props) => {
       <h1 className='text-center text-4xl font-bold'>Login</h1>
       <div className="flex flex-col">
         <Label>Username</Label>
-        <Input name='username' onChange={(e:React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, username: e.target.value})} required/>
+        <Input name='username' onChange={(e:React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, username: e.target.value})} required autoFocus/>
       </div>
       <div className="flex flex-col">
         <Label>Password</Label>

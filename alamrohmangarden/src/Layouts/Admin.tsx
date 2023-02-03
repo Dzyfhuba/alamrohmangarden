@@ -21,7 +21,7 @@ const Admin = (props: Props) => {
   return (
     <div className='flex' {...props}>
       <AdminSidebar />
-      <div className="flex flex-col dark:bg-dark dark:text-white">
+      <div className="flex flex-col dark:bg-dark dark:text-white flex-grow min-h-screen">
         <AdminNavbar base='top' />
         <main className='p-3'>
           {props.children}

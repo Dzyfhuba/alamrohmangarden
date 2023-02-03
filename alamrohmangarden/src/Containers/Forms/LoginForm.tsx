@@ -4,7 +4,7 @@ import Input from '../../Components/Input'
 import Label from '../../Components/Label'
 import Icon from '../../Images/icon.png'
 import IconDark from '../../Images/icon-dark.png'
-import { useStoreState } from '../../State/hook'
+import { useStoreActions, useStoreState } from '../../State/hook'
 import axios, { AxiosError } from 'axios'
 import { host } from '../../Variables'
 import Swal from 'sweetalert2'
@@ -28,6 +28,7 @@ const LoginForm = (props: Props) => {
   const theme = useStoreState(state => state.theme)
   const navigate = useNavigate()
   const [isLoading, setLoading] = useState<boolean>(false)
+  const setLoggedIn = useStoreActions(actions => actions.setLoggedIn)
 
   const handleSubmit = async (e: React.BaseSyntheticEvent) => {
     e.preventDefault()
@@ -43,6 +44,7 @@ const LoginForm = (props: Props) => {
         await SecureStoragePlugin.set({key: 'token', value: res.data.token.token})
         const token = await SecureStoragePlugin.get({key: 'token'})
         console.log(token.value);
+        setLoggedIn(true)
         return true
       })
       .catch((err: AxiosError) => {

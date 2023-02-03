@@ -29,17 +29,19 @@ const AdminSidebar = (props: Props) => {
     <Sidebar backgroundColor='rgb(249, 249, 249, 0.0)' defaultCollapsed={true} className='bg-white z-50 dark:bg-dark h-screen border-0 sticky hidden md:block top-0 shadow shadow-neutral-900'>
       <Menu className='bg-white dark:bg-dark dark:text-white duration-300'>
         <MenuItem className='z-20 dark:hover:text-black' onClick={() => collapseSidebar()}><span className='flex justify-center fill-white'><GiHamburgerMenu size={24} /></span></MenuItem>
-        <MenuItem icon={<GiGardeningShears />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/services'} />}>Jasa</MenuItem>
-        <MenuItem icon={<MdArticle />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/articles'} />}>Artikel</MenuItem>
-        <MenuItem icon={<ImProfile />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/about'} />}>Tentang Kami</MenuItem>
+        <MenuItem icon={<GiGardeningShears />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/admin/services'} />}>Jasa</MenuItem>
+        <MenuItem icon={<MdArticle />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/admin/articles'} />}>Artikel</MenuItem>
+        <MenuItem icon={<ImProfile />} className='z-20 dark:hover:text-black' routerLink={<NavLink to={'/admin/about'} />}>Tentang Kami</MenuItem>
         <MenuItem icon={<MdLogout />} className='z-20 dark:hover:text-black' onClick={() => {
           Swal.fire(ConfirmLogoutSweetAlertOption)
-            .then(async () => {
-              setLoading(true)
-              const {isSuccess} = await LogoutRequest()
-              if (isSuccess) {
-                navigate('/')
-                setLoading(false)
+            .then(async ({isConfirmed}) => {
+              if (isConfirmed) {
+                setLoading(true)
+                const {isSuccess} = await LogoutRequest()
+                if (isSuccess) {
+                  navigate('/')
+                  setLoading(false)
+                }
               }
             })
         }}>Logout</MenuItem>

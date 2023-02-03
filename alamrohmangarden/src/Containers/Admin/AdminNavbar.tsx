@@ -3,10 +3,12 @@ import { GiGardeningShears } from 'react-icons/gi'
 import { ImProfile } from 'react-icons/im'
 import { MdArticle, MdLogout } from 'react-icons/md'
 import { NavLink, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import Button from '../../Components/Button'
 import ButtonTheme from '../../Components/ButtonTheme'
 import LogoDark from '../../Images/logo-dark.png'
 import Logo from '../../Images/logo.png'
+import { ConfirmLogoutSweetAlertOption } from '../../Options/Sweetalert2Options'
 import { useStoreActions, useStoreState } from '../../State/hook'
 import GetTheme from '../../Utils/GetTheme'
 import LogoutRequest from '../../Utils/LogoutRequest'
@@ -17,14 +19,14 @@ type Props = {
 
 const AdminNavbar = (props: Props) => {
   const theme = useStoreState(state => state.theme)
-  const themeToggle = useStoreActions((actions) => actions.themeToggle)
+  const {themeToggle, setLoading} = useStoreActions((actions) => actions)
   const navigate = useNavigate()
   useEffect(() => {
     (async () => {
       const theme = await GetTheme()
       themeToggle(theme)
     })()
-  }, [])
+  }, [themeToggle])
   if (props.base === 'top') {
     return (
       <nav className='sticky top-0 bg-white dark:bg-dark shadow-[0_4px_12px_0px_rgba(0,0,0,0.3)]'>
@@ -35,7 +37,7 @@ const AdminNavbar = (props: Props) => {
     )
   } else {
     return (
-      <nav className='sticky bottom-0 h-14 bg-white dark:bg-dark md:hidden flex gap-3 justify-center items-center shadow-[0_-4px_12px_0px_rgba(0,0,0,0.3)]'>
+      <nav className='fixed w-screen bottom-0 h-14 bg-white dark:bg-dark md:hidden flex gap-3 justify-center items-center shadow-[0_-4px_12px_0px_rgba(0,0,0,0.3)]'>
         <NavLink to={'/admin/services'}>
           <GiGardeningShears size={48} />
         </NavLink>
@@ -46,10 +48,17 @@ const AdminNavbar = (props: Props) => {
           <ImProfile size={48} />
         </NavLink>
         <Button className='px-0 py-0' onClick={async () => {
-          const {isSuccess} = await LogoutRequest()
-          if (isSuccess) {
-            navigate('/')
-          }
+          Swal.fire(ConfirmLogoutSweetAlertOption)
+            .then(async ({isConfirmed}) => {
+              if (isConfirmed) {
+                setLoading(true)
+                const {isSuccess} = await LogoutRequest()
+                if (isSuccess) {
+                  navigate('/')
+                  setLoading(false)
+                }
+              }
+            })
         }}>
           <MdLogout size={48} />
         </Button>

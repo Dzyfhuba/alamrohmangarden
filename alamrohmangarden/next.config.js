@@ -2,6 +2,7 @@
 
 const withPWA = require('next-pwa')({
   dest: 'public',
+  swSrc: './src/sw.js'
 })
 
 const nextConfig = {

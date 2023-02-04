@@ -84,17 +84,20 @@ export default function Home() {
             height={37}
             priority
           />
-          <div className={`${styles.thirteen} hover:cursor-pointer`}>
+          <div 
+            className={`${styles.thirteen} hover:cursor-pointer`} 
+            onClick={() => {
+            // router.reload()
+              showLocalNotification({ title: 'Test Saja Ya', body: 'Ini bodynya yaaaaaaaaaaa', swRegistration: swRegistration as ServiceWorkerRegistration })
+            }}
+          >
             <Image
               src="/thirteen.svg"
               alt="13"
               width={40}
               height={31}
               priority
-              onClick={() => {
-                // router.reload()
-                showLocalNotification({ title: 'Test Saja Ya', body: 'Ini bodynya yaaaaaaaaaaa', swRegistration: swRegistration as ServiceWorkerRegistration })
-              }}
+              
             />
           </div>
         </div>

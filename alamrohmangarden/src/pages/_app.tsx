@@ -3,12 +3,12 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from 'react-js-pull-to-refresh'
-import { Device } from '@capacitor/device'
+import {Device} from '@capacitor/device'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [platform, setPlatform] = useState<'web' | 'android' | 'ios'>('web')
   const router = useRouter()
-  
+
   useEffect(() => {
     getPlatform()
   }, [])

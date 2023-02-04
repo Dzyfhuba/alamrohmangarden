@@ -50,7 +50,7 @@ export default function Home() {
             height={37}
             priority
           />
-          <div className={styles.thirteen}>
+          <div className={`${styles.thirteen} hover:cursor-pointer`}>
             <Image
               src="/thirteen.svg"
               alt="13"

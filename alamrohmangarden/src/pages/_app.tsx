@@ -21,12 +21,12 @@ export default function App({ Component, pageProps }: AppProps) {
   if (platform !== 'web') {
     return (
       <PullToRefresh
-      onRefresh={async () => router.reload()}
-      pullDownContent={<PullDownContent />}
-      releaseContent={<ReleaseContent />}
-      refreshContent={<RefreshContent />}
-      pullDownThreshold={200}
-      triggerHeight={200}
+        onRefresh={async () => router.reload()}
+        pullDownContent={<PullDownContent />}
+        releaseContent={<ReleaseContent />}
+        refreshContent={<RefreshContent />}
+        pullDownThreshold={200}
+        triggerHeight={200}
       >
         <Component {...pageProps} />
       </PullToRefresh>

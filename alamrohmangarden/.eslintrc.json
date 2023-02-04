@@ -3,7 +3,16 @@
     "next",
     "eslint:recommended"
   ],
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ],
   "rules": {
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "object-curly-spacing": ["error", "always"]
   }
 }

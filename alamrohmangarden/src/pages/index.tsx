@@ -3,15 +3,44 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter()
+  const [swRegistration, setswRegistration] = useState<ServiceWorkerRegistration>()
+  
   useEffect(() => {
-    router.prefetch('/next.svg', '/', { priority: true })
+    registerServiceWorker()
+    requestNotificationPermission()
   }, [router])
+
+  const registerServiceWorker = async () => {
+    const swRegistration = await navigator.serviceWorker.register('sw.js'); //notice the file name
+    setswRegistration(swRegistration)
+  }
+
+  const requestNotificationPermission = async () => {
+    const permission = await window.Notification.requestPermission();
+    // value of permission can be 'granted', 'default', 'denied'
+    // granted: user has accepted the request
+    // default: user has dismissed the notification permission popup by clicking on x
+    // denied: user has denied the request.
+    if(permission !== 'granted'){
+      // throw new Error('Permission not granted for Notification');
+    }
+
+    console.log(`notification permission: ${permission}`)
+  }
+
+  const showLocalNotification = ({ title, body, swRegistration }: {title: string, body: string, swRegistration: ServiceWorkerRegistration}) => {
+    swRegistration.showNotification(title, {
+      body,
+      // here you can add more properties like icon, image, vibrate, etc.
+    });
+  }
+
   return (
     <>
       <Head>
@@ -63,7 +92,8 @@ export default function Home() {
               height={31}
               priority
               onClick={() => {
-                router.reload()
+                // router.reload()
+                showLocalNotification({ title: 'Test Saja Ya', body: 'Ini bodynya yaaaaaaaaaaa', swRegistration: swRegistration as ServiceWorkerRegistration })
               }}
             />
           </div>

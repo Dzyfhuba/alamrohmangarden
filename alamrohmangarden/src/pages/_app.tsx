@@ -7,6 +7,7 @@ import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from '
 import Guest from '../layouts/Guest'
 import { Maven_Pro } from '@next/font/google'
 import Head from 'next/head'
+import Navbar from '@/containers/Navbar'
 
 const font = Maven_Pro({
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
+          <Navbar />
           <Component {...pageProps} />
         </Guest>
       </PullToRefresh>
@@ -65,6 +67,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <Component {...pageProps} />
     </Guest>
   )

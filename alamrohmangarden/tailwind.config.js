@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        hover: 'inset 0 -4px 0px 0px rgb(0 0 0)',
+      }
+    },
   },
   plugins: [],
 }

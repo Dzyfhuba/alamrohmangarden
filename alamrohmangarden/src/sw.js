@@ -18,6 +18,36 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 // If the loader is already loaded, just stop.
 if (!self.define) {
+
+  // ==============================================================================================
+  // urlB64ToUint8Array is a magic function that will encode the base64 public key
+  // to Array buffer which is needed by the subscription option
+  const urlB64ToUint8Array = base64String => {
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+    const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
+    const rawData = atob(base64)
+    const outputArray = new Uint8Array(rawData.length)
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i)
+    }
+    return outputArray
+  }
+  self.addEventListener('activate', async () => {
+  // This will be called only once when the service worker is activated.
+    try {
+      const applicationServerKey = urlB64ToUint8Array(
+        'BOdJxFw84tf1UoNWjKJTt5VtCt19v5nD3wungFgFil-QhjUgfzZv9tHOVhyfrS2iV2gCWYtgqbNzUu24_VF-TJM'
+      )
+      const options = { applicationServerKey, userVisibleOnly: true }
+      const subscription = await self.registration.pushManager.subscribe(options)
+      console.log(JSON.stringify(subscription))
+    } catch (err) {
+      console.log('Error', err)
+    }
+  })
+
+  // ==============================================================================================
+  
   let registry = {};
 
   // Used for `eval` and `importScripts` where we can't get script URL by other means.

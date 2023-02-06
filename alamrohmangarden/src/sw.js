@@ -32,15 +32,29 @@ if (!self.define) {
     }
     return outputArray
   }
+
+  // saveSubscription saves the subscription to the backend
+  const saveSubscription = async subscription => {
+    const SERVER_URL = `${process.env.NEXT_PUBLIC_BACKEND_HOST}/save-notification-subscription`
+    const response = await fetch(SERVER_URL, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(subscription),
+    })
+    return response.json()
+  }
+
   self.addEventListener('activate', async () => {
   // This will be called only once when the service worker is activated.
     try {
-      const applicationServerKey = urlB64ToUint8Array(
-        'BOdJxFw84tf1UoNWjKJTt5VtCt19v5nD3wungFgFil-QhjUgfzZv9tHOVhyfrS2iV2gCWYtgqbNzUu24_VF-TJM'
-      )
+      const applicationServerKey = urlB64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY)
       const options = { applicationServerKey, userVisibleOnly: true }
       const subscription = await self.registration.pushManager.subscribe(options)
+      const response = await saveSubscription(subscription)
       console.log(JSON.stringify(subscription))
+      console.log(`response: ${JSON.stringify(response)}`)
     } catch (err) {
       console.log('Error', err)
     }

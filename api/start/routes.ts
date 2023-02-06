@@ -48,3 +48,5 @@ Route.get('/services/:id', 'ServicesController.show')
 Route.get('/articles', 'ArticlesController.index')
 Route.get('/articles/:id', 'ArticlesController.show')
 Route.get('/about', 'AboutsController.index')
+
+Route.post('/save-notification-subscription', 'NotificationsController.saveSubscribtion')

@@ -3,7 +3,7 @@ import Logger from '@ioc:Adonis/Core/Logger'
 import NotificationSubscription from 'App/Models/NotificationSubscription'
 
 export default class NotificationsController {
-  public async saveSubscribtion({ response, request }: HttpContextContract) {
+  public async saveSubscription({ response, request }: HttpContextContract) {
     try {
       const body = request.toJSON()
       const item = await NotificationSubscription.create({ subscription: body as JSON })

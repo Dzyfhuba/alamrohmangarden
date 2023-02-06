@@ -49,4 +49,4 @@ Route.get('/articles', 'ArticlesController.index')
 Route.get('/articles/:id', 'ArticlesController.show')
 Route.get('/about', 'AboutsController.index')
 
-Route.post('/save-notification-subscription', 'NotificationsController.saveSubscribtion')
+Route.post('/save-notification-subscription', 'NotificationsController.saveSubscription')

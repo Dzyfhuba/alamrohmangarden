@@ -8,6 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.json('subscription').notNullable()
+      table.text('endpoint').notNullable()
+      table.text('key').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

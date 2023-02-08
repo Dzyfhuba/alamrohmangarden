@@ -50,3 +50,4 @@ Route.get('/articles/:id', 'ArticlesController.show')
 Route.get('/about', 'AboutsController.index')
 
 Route.post('/save-notification-subscription', 'NotificationsController.saveSubscription')
+Route.get('/send-notification', 'NotificationsController.send')

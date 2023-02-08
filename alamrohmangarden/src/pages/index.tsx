@@ -1,11 +1,6 @@
-import { useLocalNotification } from '@/hooks/LocalNotification'
-import { Montserrat } from '@next/font/google'
-import axios from 'axios'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { host } from '@/config/app'
-
-const montserrat = Montserrat({ subsets: ['latin'] })
+import { useLocalNotification } from '@/hooks/LocalNotification'
+import axios from 'axios'
 
 export default function Home() {
   const { showNotification } = useLocalNotification()

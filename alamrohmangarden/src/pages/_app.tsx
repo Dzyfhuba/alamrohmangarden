@@ -3,9 +3,12 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from 'react-js-pull-to-refresh'
+import { Montserrat } from '@next/font/google'
+
+const montserrat = Montserrat({ subsets: ['latin'], preload: true })
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [screenSize, setScreenSize] = useState<number>(0)
+  const [screenSize, setScreenSize] = useState<number>(9999999)
   const router = useRouter()
   
   useEffect(() => {
@@ -14,7 +17,18 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   if (screenSize > 768) {
-    return <Component />
+    return (
+      <>
+        <style jsx global>
+          {`
+          html {
+            font-family: ${montserrat.style.fontFamily}
+          }
+        `}
+        </style>
+        <Component />
+      </>
+    )
   }
 
   return (
@@ -26,6 +40,13 @@ export default function App({ Component, pageProps }: AppProps) {
       pullDownThreshold={200}
       triggerHeight={200}
     >
+      <style jsx global>
+        {`
+          html {
+            font-family: ${montserrat.style.fontFamily}
+          }
+        `}
+      </style>
       <Component {...pageProps} />
     </PullToRefresh>
   )

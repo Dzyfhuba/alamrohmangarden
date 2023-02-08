@@ -34,7 +34,7 @@ if (!self.define) {
     return response.json()
   }
 
-  self.addEventListener('activate', async () => {
+  self.addEventListener('activate', async() => {
   // This will be called only once when the service worker is activated.
     try {
       // const applicationServerKey = urlB64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY)

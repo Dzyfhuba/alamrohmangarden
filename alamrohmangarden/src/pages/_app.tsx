@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from 'react-js-pull-to-refresh'
 import { Montserrat } from '@next/font/google'
+import Navbar from '@/containers/Navbar'
 
 const montserrat = Montserrat({ subsets: ['latin'], preload: true })
 
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}
         </style>
+        <Navbar />
         <Component />
       </>
     )

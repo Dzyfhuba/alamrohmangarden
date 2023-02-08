@@ -2,11 +2,11 @@
 
 const withPWA = require('next-pwa')({
   dest: 'public',
-  swSrc: './src/sw.js'
+  swSrc: './src/sw.js',
 })
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     unoptimized: true
   }

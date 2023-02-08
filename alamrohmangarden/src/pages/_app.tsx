@@ -3,35 +3,30 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from 'react-js-pull-to-refresh'
-import { Device } from '@capacitor/device'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [platform, setPlatform] = useState<'web' | 'android' | 'ios'>('web')
+  const [screenSize, setScreenSize] = useState<number>(0)
   const router = useRouter()
   
   useEffect(() => {
-    getPlatform()
+    const screenSize = window.screen.availWidth
+    setScreenSize(screenSize)
   }, [])
 
-  const getPlatform = async () => {
-    const { platform } = await Device.getInfo()
-    setPlatform(platform)
+  if (screenSize > 768) {
+    return <Component />
   }
 
-  if (platform !== 'web') {
-    return (
-      <PullToRefresh
-        onRefresh={async () => router.reload()}
-        pullDownContent={<PullDownContent />}
-        releaseContent={<ReleaseContent />}
-        refreshContent={<RefreshContent />}
-        pullDownThreshold={200}
-        triggerHeight={200}
-      >
-        <Component {...pageProps} />
-      </PullToRefresh>
-    )
-  }
-
-  return <Component {...pageProps} />
+  return (
+    <PullToRefresh
+      onRefresh={async() => router.reload()}
+      pullDownContent={<PullDownContent />}
+      releaseContent={<ReleaseContent />}
+      refreshContent={<RefreshContent />}
+      pullDownThreshold={200}
+      triggerHeight={200}
+    >
+      <Component {...pageProps} />
+    </PullToRefresh>
+  )
 }

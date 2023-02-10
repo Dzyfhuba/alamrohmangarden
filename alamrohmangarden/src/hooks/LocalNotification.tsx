@@ -37,8 +37,10 @@ const LocalNotification = {
 
 export const useLocalNotification = () => {
   useEffect(() => {
-    LocalNotification.registerServiceWorker()
-    LocalNotification.requestNotificationPermission()
+    if ("serviceWorker" in navigator) {
+      LocalNotification.registerServiceWorker()
+      LocalNotification.requestNotificationPermission()
+    }
   }, [])
   return { showNotification: LocalNotification.showNotification }
 }

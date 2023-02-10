@@ -1,27 +1,31 @@
-import { host } from '@/config/app'
+import { appName, host } from '@/config/app'
+import Hero from '@/containers/Hero'
 import { useLocalNotification } from '@/hooks/LocalNotification'
 import axios from 'axios'
+import Head from 'next/head'
 
 export default function Home() {
   const { showNotification } = useLocalNotification()
   
   return (
     <>
-      <button 
-        className='h-11 px-5 py-2.5 bg-blue-500'
-        onClick={
-          () => showNotification({ title: 'Local Notification Test', body: '' })
-        }
+      <Head>
+        <title>{appName}</title>
+      </Head>
+      <Hero />
+      <button
+        className='px-5 py-2.5 bg-red-400'
+        onClick={() => showNotification({ title: 'Haloo', body: 'BOdy' })}
       >
-          Local Notification Test
+        Local
       </button>
-      <button 
-        className='h-11 px-5 py-2.5 bg-red-500'
-        onClick={
-          async() => await axios.get(`${host}/send-notification`)
-        }
+      <button
+        className='px-5 py-2.5 bg-blue-400'
+        onClick={async() => {
+          axios.get(host + '/send-notification')
+        }}
       >
-          Remote Notification Test
+        Remote
       </button>
     </>
   )

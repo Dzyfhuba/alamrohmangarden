@@ -112,15 +112,15 @@ export default class ServicesController {
 
       const images = item.images.split(',')
       images.forEach((image) => {
-        Logger.info(image.split('/').at(-1) as string)
+        // Logger.info(image.split('/').at(-1) as string)
         const path = Drive.application.resourcesPath(`services/${image.split('/').at(-1)}`)
-        Logger.info(path)
+        // Logger.info(path)
         if (fs.existsSync(path)) {
           fs.unlinkSync(path)
         }
       })
 
-      // await item.delete()
+      await item.delete()
 
       return response.ok(item)
     } catch (error) {

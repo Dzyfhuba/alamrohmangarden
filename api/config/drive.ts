@@ -53,7 +53,7 @@ export default driveConfig({
       | files.
       |
       */
-      root: Application.resourcesPath('uploads'),
+      root: Application.resourcesPath(),
 
       /*
       |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ export default driveConfig({
       | you are not registering routes with this prefix.
       |
       */
-      basePath: '/uploads',
+      basePath: '/',
     },
 
     /*

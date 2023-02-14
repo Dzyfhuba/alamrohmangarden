@@ -3,6 +3,7 @@ import Service from 'App/Models/Service'
 import ServiceStoreValidator from 'App/Validators/ServiceStoreValidator'
 import { nanoid } from 'nanoid'
 import Application from '@ioc:Adonis/Core/Application'
+import Drive from '@ioc:Adonis/Core/Drive'
 import Logger from '@ioc:Adonis/Core/Logger'
 import ServiceUpdateValidator from 'App/Validators/ServiceUpdateValidator'
 import fs from 'fs'
@@ -111,13 +112,15 @@ export default class ServicesController {
 
       const images = item.images.split(',')
       images.forEach((image) => {
-        const path = `$('services'}/${image}`
+        Logger.info(image.split('/').at(-1) as string)
+        const path = Drive.application.resourcesPath(`services/${image.split('/').at(-1)}`)
+        Logger.info(path)
         if (fs.existsSync(path)) {
           fs.unlinkSync(path)
         }
       })
 
-      await item.delete()
+      // await item.delete()
 
       return response.ok(item)
     } catch (error) {

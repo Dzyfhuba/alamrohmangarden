@@ -27,66 +27,10 @@ export default class Service extends BaseModel {
   public content: string
 
   @column()
-  public images: string[] | string
+  public images: string
 
   @column()
-  public tags: string[] | string
-
-  @beforeCreate()
-  public static imagesBC(service: Service) {
-    if (
-      typeof service.images !== 'string' &&
-      service.images !== undefined &&
-      service.images !== null
-    ) {
-      service.images = service.images.toString()
-    }
-  }
-
-  @beforeSave()
-  public static imagesBS(service: Service) {
-    if (
-      typeof service.images !== 'string' &&
-      service.images !== undefined &&
-      service.images !== null
-    ) {
-      service.images = service.images.toString()
-    }
-  }
-
-  @beforeUpdate()
-  public static imagesBU(service: Service) {
-    if (
-      typeof service.images !== 'string' &&
-      service.images !== undefined &&
-      service.images !== null
-    ) {
-      service.images = service.images.toString()
-    }
-  }
-
-  @beforeCreate()
-  public static tagsBC(service: Service) {
-    service.tags = service.tags.toString()
-  }
-
-  @beforeSave()
-  public static tagsBS(service: Service) {
-    service.tags = service.tags.toString()
-  }
-
-  @beforeUpdate()
-  public static tagsBU(service: Service) {
-    service.tags = service.tags.toString()
-  }
-
-  @afterFind()
-  public static parsingAfterFind(service: Service) {
-    if (service.images) {
-      service.images = service.images as string
-      service.images = service.images.split(',')
-    }
-  }
+  public tags: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

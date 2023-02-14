@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
         </style>
         <Navbar />
-        <Component />
+        <Component {...pageProps} />
       </>
     )
   }

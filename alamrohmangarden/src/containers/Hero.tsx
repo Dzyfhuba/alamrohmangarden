@@ -1,4 +1,6 @@
+import Button from '@/components/Button'
 import { appName } from '@/config/app'
+import LeafDown from '@/icons/LeafDown'
 import Hero1 from '@/images/hero1.jpg'
 import Hero2 from '@/images/hero2.jpg'
 import Hero3 from '@/images/hero3.jpg'
@@ -40,6 +42,9 @@ const Hero = () => {
           {'in your home!'}
         </h1>
       </div>
+      <Button className='absolute bottom-0 left-1/2 -translate-x-1/2 m-3'>
+        <LeafDown />
+      </Button>
     </section>
   )
 }

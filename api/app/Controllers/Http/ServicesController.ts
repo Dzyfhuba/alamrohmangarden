@@ -18,12 +18,11 @@ export default class ServicesController {
 
   public async image({ request, response }: HttpContextContract) {
     try {
-      Logger.info(Application.publicPath(`services/${request.param('image')}`))
-      // const fromFs = fs.existsSync(Application.publicPath(`services/${request.param('image')}`))
-      // Logger.info(fromFs)
-      const image = await Drive.getStream(
-        Application.publicPath(`services/${request.param('image')}`)
-      )
+      const location = Application.resourcesPath(`storages/services/${request.param('image')}`)
+      Logger.info(Application.resourcesPath(`storages/services/${request.param('image')}`))
+      const fromFs = fs.existsSync(location)
+
+      const image = fs.createReadStream(location)
 
       return response.stream(image)
     } catch (error) {

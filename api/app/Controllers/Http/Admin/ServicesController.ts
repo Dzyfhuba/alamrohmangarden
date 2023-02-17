@@ -113,7 +113,7 @@ export default class ServicesController {
       const images = item.images.split(',')
       images.forEach((image) => {
         // Logger.info(image.split('/').at(-1) as string)
-        const path = Drive.application.resourcesPath(`services/${image.split('/').at(-1)}`)
+        const path = Drive.application.resourcesPath(`storages/services/${image.split('/').at(-1)}`)
         // Logger.info(path)
         if (fs.existsSync(path)) {
           fs.unlinkSync(path)

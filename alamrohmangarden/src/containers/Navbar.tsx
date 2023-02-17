@@ -1,16 +1,30 @@
 import Button from '@/components/Button'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { HTMLAttributes, useRef, useState } from 'react'
 import { MdMenu } from 'react-icons/md'
 import Logo from '../../public/logo.png'
 
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState<boolean>(true)
+  const nav = useRef<HTMLElement>(null)
+  const [hideOnScroll, setHideOnScroll] = useState<boolean>(true)
+  
+  useScrollPosition(({ prevPos, currPos }) => {
+    const isShow = currPos.y > prevPos.y
+    if (isShow !== hideOnScroll) setHideOnScroll(isShow)
+  }, [hideOnScroll], undefined, false, 300)
   
   return (
     <>
-      <nav className='h-14 shadow px-3 sm:px-12 flex justify-between capitalize font-bold tracking-[0.5px]'>
+      <nav
+        className={`h-14 w-full shadow px-3 sm:px-12 
+          flex justify-between capitalize font-bold tracking-[0.5px] 
+          fixed top-0 left-0 z-50 bg-base
+          ${hideOnScroll ? 'ease-in translate-y-0' : 'ease-out -translate-y-full'} duration-300 transition-transform`}
+        ref={nav}
+      >
         <Link href={'/'}>
           <Image src={Logo} alt={'Alam Rohman Garden'} className='h-full w-full' height={56} width={262} priority />
         </Link>

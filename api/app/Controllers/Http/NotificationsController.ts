@@ -40,7 +40,7 @@ export default class NotificationsController {
 
       const response = await webpush.sendNotification(subscription, data).catch((error) => {
         Logger.info(JSON.stringify(error))
-        Logger.info(`type: ${typeof subscription.key}`)
+        // Logger.info(`type: ${typeof subscription.key}`)
       })
       // Logger.info(JSON.stringify(subscription))
       // Logger.info(JSON.stringify(data))

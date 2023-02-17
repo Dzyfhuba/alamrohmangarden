@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { shuffle } from 'App/Helper/Shuffle'
 import Service from 'App/Models/Service'
 
 export default class DashboardController {
@@ -11,8 +12,9 @@ export default class DashboardController {
           images: item.images.split(','),
         }
       })
+      const shuffled = shuffle(mapped)
 
-      return response.ok(mapped)
+      return response.ok(shuffled)
     } catch (error) {
       return response.notFound(error)
     }

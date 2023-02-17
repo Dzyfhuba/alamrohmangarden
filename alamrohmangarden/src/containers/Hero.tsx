@@ -32,7 +32,7 @@ const Hero = () => {
   }, [counter])
 
   return (
-    <section className='h-[420px] sm:h-[600px] relative'>
+    <section className='h-screen relative'>
       <Image src={image} alt={appName} fill className='contrast-[0.6] object-cover' />
       <div className="text-3xl sm:text-6xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-center capitalize whitespace-nowrap flex flex-col gap-3">
         <h1 className=''>
@@ -45,6 +45,10 @@ const Hero = () => {
       <Button className='absolute bottom-0 left-1/2 -translate-x-1/2 m-3'>
         <LeafDown />
       </Button>
+      {/* <Image src={Grass} alt='alam rohman garden grass' className='absolute bottom-0' /> */}
+      <div 
+        className={`h-[17px] w-full absolute bottom-0 bg-[url(/grass.svg)] bg-repeat-x`}
+      />
     </section>
   )
 }

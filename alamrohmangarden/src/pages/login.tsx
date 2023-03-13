@@ -1,4 +1,3 @@
-import useAxios, { token } from '@/applications/Axios'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { host } from '@/config/app'
@@ -6,7 +5,7 @@ import useIsLoggedIn from '@/hooks/IsLoggedIn'
 import axios from 'axios'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 type Props = {}
 

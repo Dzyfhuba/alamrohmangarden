@@ -7,9 +7,19 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: true,
   images: {
     unoptimized: true
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: '/admin/services',
+        permanent: false
+      },
+    ]
+  },
 }
 
 module.exports = withPWA(nextConfig)

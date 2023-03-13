@@ -8,6 +8,7 @@ import Hero4 from '@/images/hero4.jpg'
 import Hero5 from '@/images/hero5.jpg'
 import { Patrick_Hand } from '@next/font/google'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const patrickaHand = Patrick_Hand({
@@ -18,6 +19,7 @@ const patrickaHand = Patrick_Hand({
 const Hero = () => {
   const [image, setImage] = useState(Hero1)
   const [counter, setCounter] = useState<number>(0)
+  const router = useRouter()
 
   useEffect(() => {
     const images = [Hero1, Hero2, Hero3, Hero4, Hero5]
@@ -42,7 +44,10 @@ const Hero = () => {
           {'in your home!'}
         </h1>
       </div>
-      <Button className='absolute bottom-0 left-1/2 -translate-x-1/2 m-3'>
+      <Button
+        className='absolute bottom-0 left-1/2 -translate-x-1/2 m-3'
+        onClick={() => router.push('/#service')}
+      >
         <LeafDown />
       </Button>
       {/* <Image src={Grass} alt='alam rohman garden grass' className='absolute bottom-0' /> */}

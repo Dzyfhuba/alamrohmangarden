@@ -29,9 +29,9 @@ Route.post('/login', 'Authentication/LoginController.index')
 Route.get('/logout', 'Authentication/LogoutController.index').middleware('auth:api')
 Route.get('/check', async ({ auth, response }) => {
   try {
-    const isLoggedIn = await auth.use('api').isLoggedIn
-
-    return response.ok({ isLoggedIn })
+    const isLoggedIn = auth.use('api').isLoggedIn
+    const user = auth.use('api').user!
+    return response.ok({ isLoggedIn, user })
   } catch (error) {
     return response.badRequest(error)
   }

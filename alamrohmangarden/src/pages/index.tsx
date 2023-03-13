@@ -35,7 +35,8 @@ export default function Home() {
         <title>{appName}</title>
       </Head>
       <Hero />
-      <div className="p-3">
+      <div className="p-3" id='service'>
+        <h1 className='text-center text-4xl text-green-2 capitalize'>{'kami melayani jasa-jasa berikut'}</h1>
         <section className='grid grid-cols-2 grid-flow-row md:flex md:justify-center text-center'>
           {services ? services.map((service, index) => (
             <article key={index} className='border p-3'>
@@ -52,7 +53,7 @@ export default function Home() {
               <h1>
                 <Link 
                   href={`/services/${service.slug}`}
-                  className='capitalize text-green-1 text-lg hover:text-blue-500 hover:underline duration-300 transition-colors'
+                  className='capitalize text-green-1 text-xl hover:text-blue-500 hover:underline duration-300 transition-colors'
                 >
                   {service.title}
                 </Link>
@@ -61,8 +62,13 @@ export default function Home() {
           )) : ''}
         </section>
       </div>
-      <article>
-        <h1 className='capitalize text-4xl text-center'>{'kami tangani semuanya untuk anda'}</h1>
+      <article className='container mx-auto text-center'>
+        <h1 className='capitalize text-4xl text-green-2'>
+          {'kami tangani semuanya untuk anda'}
+        </h1>
+        <p>
+          {'kami dengan bangga menawarkan jasa-jasa kami yang dilaksanakan sesuai preferensi klien dengan memprioritaskan komunikasi.'}
+        </p>
       </article>
       <button
         className='px-5 py-2.5 bg-red-400'

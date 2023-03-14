@@ -1,6 +1,6 @@
-import Sidebar from '@/containers/Sidebar'
-import React, { HTMLAttributes } from 'react'
-import { ProSidebarProvider } from 'react-pro-sidebar'
+import AdminNavbar from '@/containers/AdminNavbar'
+import AdminSidebar from '@/containers/AdminSidebar'
+import { HTMLAttributes } from 'react'
 
 interface Props extends HTMLAttributes<HTMLElement>{
   //
@@ -8,7 +8,8 @@ interface Props extends HTMLAttributes<HTMLElement>{
 const Admin = (props: Props) => {
   return (
     <main {...props}>
-      <Sidebar />
+      <AdminSidebar />
+      <AdminNavbar />
       {props.children}
     </main>
   )

@@ -2,24 +2,29 @@ import useAxios from '@/applications/Axios'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-const useIsLoggedIn = () => {
+type Props = {
+  strict?: boolean,
+}
+
+const useIsLoggedIn = (props: Props) => {
   const { AxiosAuth, isLoading } = useAxios()
   const router = useRouter()
 
   useEffect(() => {
-    (async() => {
-      console.log(`axios auth isLoading: ${isLoading}`)
-      if (!isLoading) {
-        await AxiosAuth.get('/check')
-          .then(res => {
-            console.log(res.data)
+    console.log(`axios auth isLoading: ${isLoading}`)
+    if (!isLoading) {
+      AxiosAuth.get('/check')
+        .then(res => {
+          console.log(res.data)
+          if (router.pathname.includes('/login'))
             router.push('/admin/services')
-          })
-          .catch(err => {
-            console.error(err)
-          })
-      }
-    })()
+        })
+        .catch(err => {
+          if (router.pathname.includes('/admin')) 
+            router.push('/')
+          console.error(err)
+        })
+    }
   }, [AxiosAuth, isLoading, router])
 }
 

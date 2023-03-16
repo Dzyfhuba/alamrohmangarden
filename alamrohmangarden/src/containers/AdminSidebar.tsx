@@ -1,19 +1,19 @@
 import Button from '@/components/Button';
 import Link from 'next/link';
-import React from 'react'
-import { MdMenu } from 'react-icons/md';
-import { Sidebar as SidebarComp, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
+import { MdClose } from 'react-icons/md';
+import { Menu, MenuItem, Sidebar as SidebarComp, useProSidebar } from 'react-pro-sidebar';
 
 type Props = {}
 
 const AdminSidebar = (props: Props) => {
   const { collapseSidebar, collapsed } = useProSidebar()
+  
   return (
     <>
       <SidebarComp className='fixed z-[999] top-0 left-0' collapsedWidth='0' defaultCollapsed={true}>
         <Menu className='bg-white h-screen'>
-          <Button onClick={() => collapseSidebar()}>
-            <MdMenu />
+          <Button onClick={() => collapseSidebar()} className='ml-auto block'>
+            <MdClose size={36} />
           </Button>
           <MenuItem component={<Link href={'/admin/services'} />}>
             Services

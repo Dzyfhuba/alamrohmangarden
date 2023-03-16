@@ -15,7 +15,7 @@ export default class ServicesController {
       if (title) {
         const data = await Service.query()
           .whereRaw('LOWER(title) LIKE ?', [`%${title.toLocaleLowerCase()}%`])
-          .select(['title', 'slug', 'updated_at'])
+          .select(['id', 'title', 'slug', 'updated_at'])
           .orderBy('updated_at', 'desc')
 
         return response.ok(data)

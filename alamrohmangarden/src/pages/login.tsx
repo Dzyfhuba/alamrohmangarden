@@ -6,6 +6,7 @@ import axios from 'axios'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
+import Swal from 'sweetalert2'
 
 type Props = {}
 
@@ -32,7 +33,7 @@ const Login = (props: Props) => {
   const [isLoading, setLoading] = useState<boolean>(false)
 
   const router = useRouter()
-  useIsLoggedIn()
+  useIsLoggedIn({ strict: false })
   
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true)
@@ -54,7 +55,14 @@ const Login = (props: Props) => {
       value: JSON.stringify(token)
     })
     setLoading(false)
-    router.push('/admin/services')
+
+    Swal.fire({
+      title: 'Login Berhasil',
+      icon: 'success'
+    })
+      .then(() => {
+        router.push('/admin/services')
+      })
   }
 
   return (

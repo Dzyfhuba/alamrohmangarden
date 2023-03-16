@@ -1,11 +1,9 @@
 import Admin from '@/layouts/Admin'
 import React from 'react'
 
-type Props = {}
-
-const index = (props: Props) => {
+const index = () => {
   return (
-    <Admin>index</Admin>
+    <Admin>about</Admin>
   )
 }
 

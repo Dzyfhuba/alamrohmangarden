@@ -35,7 +35,7 @@ Route.get('/check', async ({ auth, response }) => {
   } catch (error) {
     return response.badRequest(error)
   }
-}).middleware('auth:api')
+})
 
 Route.group(() => {
   Route.resource('/admin/services', 'Admin/ServicesController')

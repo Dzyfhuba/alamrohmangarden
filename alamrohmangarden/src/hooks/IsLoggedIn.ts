@@ -15,14 +15,11 @@ const useIsLoggedIn = (props: Props) => {
     if (!isLoading) {
       AxiosAuth.get('/check')
         .then(res => {
-          console.log(res.data)
-          if (router.pathname.includes('/login'))
+          console.log(res.data.isLoggedIn)
+          if (res.data.isLoggedIn && router.pathname.includes('/login'))
             router.push('/admin/services')
-        })
-        .catch(err => {
-          if (router.pathname.includes('/admin')) 
+          if (!res.data.isLoggedIn && router.pathname.includes('/admin'))
             router.push('/')
-          console.error(err)
         })
     }
   }, [AxiosAuth, isLoading, router])

@@ -1,6 +1,6 @@
 import { host } from '@/config/app'
 import { TokenInterface } from '@/pages/login'
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -16,8 +16,8 @@ const useAxios = () => {
         .then(val => JSON.parse(val.value))
         .catch(err => {
           console.error(err)
-          if(router.pathname.includes('/admin'))
-            router.push('/')
+          // if(router.pathname.includes('/admin'))
+          //   router.push('/')
         })
       const token:{type: string, token: string} = tokenStorage || { token: '', type: '' }
       setToken(token)
@@ -25,13 +25,20 @@ const useAxios = () => {
     })()
   }, [])
 
-  const AxiosAuth = axios.create({
+  let AxiosAuth: AxiosInstance = axios.create({
     baseURL: host,
-    headers: {
-      Authorization: `${token.type} ${token.token}`
-    },
     timeout: 20000,
   })
+
+  if (!isLoading) {
+    AxiosAuth = axios.create({
+      baseURL: host,
+      headers: {
+        Authorization: `${token.type} ${token.token}`
+      },
+      timeout: 20000,
+    })
+  }
 
   return { AxiosAuth, isLoading }
 }

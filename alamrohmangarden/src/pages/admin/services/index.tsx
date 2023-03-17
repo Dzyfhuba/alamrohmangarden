@@ -13,21 +13,22 @@ const index = () => {
   const [services, setServices] = useState<ServiceInterface[]>([])
 
   const { collapseSidebar } = useProSidebar()
-  const { AxiosAuth } = useAxios()
+  const { AxiosAuth, isLoading } = useAxios()
 
   useEffect(() => {
-    getServices()
-  }, [])
-
-  const getServices = async() => {
-    const services = await AxiosAuth.get(host + '/admin/services')
-      .then(res => res.data)
-      .catch(err => {
-        console.error(err)
-        return []
-      })
-    setServices(services)
-  }
+    // if (!isLoading) {
+    (async() => {
+      const services = await AxiosAuth.get(host + '/admin/services')
+        .then(res => res.data)
+        .catch(err => {
+          console.error(err)
+          return []
+        })
+      console.log(services)
+      setServices(services)
+    })()
+    // }
+  }, [isLoading])
 
   return (
     <Admin>
@@ -43,7 +44,7 @@ const index = () => {
       <section id="services">
         <ul>
           {
-            services.length ? services.map(service => (
+            services.length ? services.map((service) => (
               <li key={service.id}>
                 <h1>{service.id}</h1>
               </li>

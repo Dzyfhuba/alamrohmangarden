@@ -22,7 +22,7 @@ export default class ServicesController {
       }
 
       const data = await Service.query()
-        .select(['title', 'slug', 'updated_at'])
+        .select(['id', 'title', 'slug', 'updated_at'])
         .orderBy('updated_at', 'desc')
 
       return response.ok(data)
